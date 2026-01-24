@@ -4,6 +4,8 @@ import NotFound from "../pages/NotFound";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
+import AddSchedule from "../pages/AddSchedule";
+import ScheduleList from "../pages/ScheduleList";
 
 const PublicRoutes = createBrowserRouter([
   {
@@ -15,6 +17,11 @@ const PublicRoutes = createBrowserRouter([
         index: true,
         element: <Home></Home>,
       },
+      {
+        path: "/addSchedule",
+        element: <AddSchedule></AddSchedule>,
+      },
+      { path: "/scheduleList", element: <ScheduleList></ScheduleList> },
       {
         path: "/register",
         element: <Register></Register>,
