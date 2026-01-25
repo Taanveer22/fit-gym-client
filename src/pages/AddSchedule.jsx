@@ -23,13 +23,13 @@ const AddSchedule = () => {
 
   const handleAddScheduleForm = (e) => {
     e.preventDefault();
-    const formattedHour = formatTime12Hour(selectedTime);
+    const formattedTime = formatTime12Hour(selectedTime);
     const formattedDate = selectedDate.toLocaleDateString("en-CA");
     const title = e.target.title.value;
     const day = e.target.day.value;
 
     const scheduleData = {
-      hour: formattedHour,
+      time: formattedTime,
       date: formattedDate,
       title: title,
       day: day,

@@ -21,7 +21,11 @@ const PublicRoutes = createBrowserRouter([
         path: "/addSchedule",
         element: <AddSchedule></AddSchedule>,
       },
-      { path: "/scheduleList", element: <ScheduleList></ScheduleList> },
+      {
+        path: "/scheduleList",
+        element: <ScheduleList></ScheduleList>,
+        loader: () => fetch(`http://localhost:5000/schedule`),
+      },
       {
         path: "/register",
         element: <Register></Register>,
