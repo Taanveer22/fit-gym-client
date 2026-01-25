@@ -2,9 +2,25 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaFile } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { FaCheckDouble } from "react-icons/fa6";
+import Swal from "sweetalert2";
 
-const ScheduleListItem = ({ item, index }) => {
+const ScheduleListItem = ({ item, index, stateList, setStateList }) => {
   // console.log(item, index);
+  const handleDelete = (id) => {
+    // console.log(id);
+    fetch(`http://localhost:5000/schedule/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.deletedCount > 0) {
+          Swal.fire("delete item successfully");
+        }
+        const remainingList = stateList.filter((list) => list._id !== id);
+        setStateList(remainingList);
+      });
+  };
   return (
     <div>
       {/* table list item */}
@@ -29,7 +45,10 @@ const ScheduleListItem = ({ item, index }) => {
               <td>{item?.time}</td>
               <td>
                 <div className="flex items-center gap-1">
-                  <button className="btn btn-xs btn-secondary">
+                  <button
+                    onClick={() => handleDelete(item?._id)}
+                    className="btn btn-xs btn-secondary"
+                  >
                     <MdDeleteForever size={15}></MdDeleteForever>
                   </button>
                   <button className="btn btn-xs btn-secondary">

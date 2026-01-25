@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router-dom";
 import ScheduleListItem from "./ScheduleListItem";
+import { useState } from "react";
 
 const ScheduleList = () => {
   const loadedList = useLoaderData();
   // console.log(loadedList);
+  const [stateList, setStateList] = useState(loadedList);
   return (
     <div>
       {/* search bar */}
@@ -33,11 +35,13 @@ const ScheduleList = () => {
         <p>No Data Found</p>
       ) : (
         <div className="">
-          {loadedList.map((item, index) => (
+          {stateList.map((item, index) => (
             <ScheduleListItem
               item={item}
               index={index}
               key={item._id}
+              stateList={stateList}
+              setStateList={setStateList}
             ></ScheduleListItem>
           ))}
         </div>
