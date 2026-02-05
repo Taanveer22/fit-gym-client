@@ -3,27 +3,43 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
+// ======================
+// Utility function
+// Format time into 12-hour AM/PM format
+// ======================
 const formatTime12Hour = (date) => {
-  let hours = date.getHours();
-  const minutes = String(date.getMinutes()).padStart(2, "0");
-  const seconds = String(date.getSeconds()).padStart(2, "0");
-  const ampm = hours >= 12 ? "PM" : "AM";
-  hours = hours % 12 || 12;
-  return `${hours} : ${minutes} : ${seconds} ${ampm}`;
+  // get hour from date
+  let hour = date.getHours();
+  // get minute and always keep 2 digits (ex: 05)
+  const minute = String(date.getMinutes()).padStart(2, "0");
+  // get second and always keep 2 digits (ex: 05)
+  const second = String(date.getSeconds()).padStart(2, "0");
+  // check AM or PM
+  const AmPm = hour >= 12 ? "PM" : "AM";
+  // convert 24-hour to 12-hour format
+  hour = hour % 12;
+  if (hour === 0) {
+    hour = 12;
+  }
+  return `${hour} : ${minute} : ${second} ${AmPm}`;
 };
 // console.log(formatTime12Hour(new Date()));
 
 const AddSchedule = () => {
+  // ======================
+  // State Management
+  // ======================
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(new Date());
 
-  const handleTimeChange = (time) => {
-    setSelectedTime(time);
-  };
-
+  // ======================
+  // Handle Form Submit
+  // ======================
   const handleAddScheduleForm = (e) => {
     e.preventDefault();
+    // format time using our function
     const formattedTime = formatTime12Hour(selectedTime);
+    // format date to YYYY-MM-DD
     const formattedDate = selectedDate.toLocaleDateString("en-CA");
     const title = e.target.title.value;
     const day = e.target.day.value;
@@ -36,6 +52,9 @@ const AddSchedule = () => {
     };
     // console.log(scheduleData);
 
+    // ======================
+    // API Request
+    // ======================
     fetch(`http://localhost:5000/schedule`, {
       method: "POST",
       headers: {
@@ -59,6 +78,7 @@ const AddSchedule = () => {
       </h1>
       <form onSubmit={handleAddScheduleForm} className="w-11/12 mx-auto">
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
+          {/* title */}
           <fieldset className="fieldset w-full">
             <legend className="fieldset-legend text-lg font-semibold">
               Title
@@ -70,6 +90,7 @@ const AddSchedule = () => {
               placeholder="Title"
             />
           </fieldset>
+          {/* date picker */}
           <fieldset className="fieldset w-full ">
             <legend className="fieldset-legend text-lg font-semibold">
               Date
@@ -77,9 +98,10 @@ const AddSchedule = () => {
             <DatePicker
               className="input w-full"
               selected={selectedDate}
-              onChange={(clickedDate) => setSelectedDate(clickedDate)}
+              onChange={(date) => date && setSelectedDate(date)}
             ></DatePicker>
           </fieldset>
+          {/* day */}
           <fieldset className="fieldset w-full ">
             <legend className="fieldset-legend text-lg font-semibold">
               Day
@@ -94,6 +116,7 @@ const AddSchedule = () => {
               <option value="thursday">Thursday</option>
             </select>
           </fieldset>
+          {/* time picker */}
           <fieldset className="fieldset w-full ">
             <legend className="fieldset-legend text-lg font-semibold">
               Time
@@ -101,7 +124,7 @@ const AddSchedule = () => {
             <DatePicker
               className="input w-full"
               selected={selectedTime}
-              onChange={handleTimeChange}
+              onChange={(time) => time && setSelectedTime(time)}
               showTimeSelect
               showTimeSelectOnly
               timeIntervals={15}

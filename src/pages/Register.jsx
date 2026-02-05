@@ -1,4 +1,8 @@
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthContextProvider";
+
 const Register = () => {
+  const { registerUser } = useContext(AuthContext);
   const handleRegisterForm = (e) => {
     e.preventDefault();
 
@@ -7,7 +11,16 @@ const Register = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     console.log(name, photo, email, password);
+
+    registerUser(email, password)
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">

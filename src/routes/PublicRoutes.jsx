@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn";
 import Register from "../pages/Register";
 import AddSchedule from "../pages/AddSchedule";
 import ScheduleList from "../pages/ScheduleList";
+import UpdateSchedule from "../components/UpdateSchedule";
 
 const PublicRoutes = createBrowserRouter([
   {
@@ -20,6 +21,12 @@ const PublicRoutes = createBrowserRouter([
       {
         path: "/addSchedule",
         element: <AddSchedule></AddSchedule>,
+      },
+      {
+        path: "/updateSchedule/:id",
+        element: <UpdateSchedule></UpdateSchedule>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/schedule/${params.id}`),
       },
       {
         path: "/scheduleList",

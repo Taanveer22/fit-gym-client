@@ -3,6 +3,7 @@ import { FaFile } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { FaCheckDouble } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const ScheduleListItem = ({ item, index, stateList, setStateList }) => {
   // console.log(item, index);
@@ -51,9 +52,12 @@ const ScheduleListItem = ({ item, index, stateList, setStateList }) => {
                   >
                     <MdDeleteForever size={15}></MdDeleteForever>
                   </button>
-                  <button className="btn btn-xs btn-secondary">
+                  <Link
+                    to={`/updateSchedule/${item._id}`}
+                    className="btn btn-xs btn-secondary"
+                  >
                     <FaFile size={15}></FaFile>
-                  </button>
+                  </Link>
                   <button className="btn btn-xs btn-secondary">
                     <FaCheck size={15}></FaCheck>
                   </button>
