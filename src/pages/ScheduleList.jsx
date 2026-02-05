@@ -1,11 +1,27 @@
 import { useLoaderData } from "react-router-dom";
 import ScheduleListItem from "./ScheduleListItem";
 import { useState } from "react";
+import Swal from "sweetalert2";
 
 const ScheduleList = () => {
   const loadedList = useLoaderData();
   // console.log(loadedList);
   const [stateList, setStateList] = useState(loadedList);
+  const handleDelete = (id) => {
+    // console.log(id);
+    fetch(`http://localhost:5000/schedules/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        if (data.deletedCount > 0) {
+          Swal.fire("delete item successfully");
+        }
+        const remainingList = stateList.filter((list) => list._id !== id);
+        setStateList(remainingList);
+      });
+  };
   return (
     <div>
       {/* search bar */}
@@ -40,8 +56,7 @@ const ScheduleList = () => {
               item={item}
               index={index}
               key={item._id}
-              stateList={stateList}
-              setStateList={setStateList}
+              handleDelete={handleDelete}
             ></ScheduleListItem>
           ))}
         </div>

@@ -55,7 +55,7 @@ const AddSchedule = () => {
     // ======================
     // API Request
     // ======================
-    fetch(`http://localhost:5000/schedule`, {
+    fetch(`http://localhost:5000/schedules`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

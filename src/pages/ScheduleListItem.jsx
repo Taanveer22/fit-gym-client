@@ -2,26 +2,11 @@ import { MdDeleteForever } from "react-icons/md";
 import { FaFile } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
 import { FaCheckDouble } from "react-icons/fa6";
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
-const ScheduleListItem = ({ item, index, stateList, setStateList }) => {
+const ScheduleListItem = ({ item, index, handleDelete }) => {
   // console.log(item, index);
-  const handleDelete = (id) => {
-    // console.log(id);
-    fetch(`http://localhost:5000/schedule/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        if (data.deletedCount > 0) {
-          Swal.fire("delete item successfully");
-        }
-        const remainingList = stateList.filter((list) => list._id !== id);
-        setStateList(remainingList);
-      });
-  };
+
   return (
     <div>
       {/* table list item */}

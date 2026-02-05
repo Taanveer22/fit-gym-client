@@ -2,19 +2,25 @@ import { useContext } from "react";
 import { AuthContext } from "../provider/AuthContextProvider";
 
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
+
   const handleRegisterForm = (e) => {
     e.preventDefault();
-
     const name = e.target.name.value;
     const photo = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(name, photo, email, password);
-
+    // console.log(name, photo, email, password);
     registerUser(email, password)
       .then((result) => {
         console.log(result);
+        updateUserProfile(name, photo)
+          .then((result) => {
+            console.log(result);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);

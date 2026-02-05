@@ -1,11 +1,29 @@
-const SignIn = () => {
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
+import { useContext } from "react";
+import { AuthContext } from "../provider/AuthContextProvider";
 
+const SignIn = () => {
+  const { signInUser, googleSignIn } = useContext(AuthContext);
+
+  const handleSignInForm = (e) => {
+    e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    // console.log(email, password);
+    signInUser(email, password)
+      .then((result) => console.log(result.user))
+      .catch((error) => console.log(error));
   };
+
+  const handleGoogleSignIn = () => {
+    googleSignIn()
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -19,7 +37,7 @@ const SignIn = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form onSubmit={handleSignInSubmit} className="card-body">
+            <form onSubmit={handleSignInForm} className="card-body">
               <fieldset className="fieldset">
                 <label className="label">Email</label>
                 <input
@@ -41,6 +59,12 @@ const SignIn = () => {
                 <button className="btn btn-neutral mt-4">Signin</button>
               </fieldset>
             </form>
+            <button
+              onClick={handleGoogleSignIn}
+              className="btn btn-warning mx-6 mb-6"
+            >
+              Google Signin
+            </button>
           </div>
         </div>
       </div>
