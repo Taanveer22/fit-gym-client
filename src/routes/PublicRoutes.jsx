@@ -26,12 +26,12 @@ const PublicRoutes = createBrowserRouter([
         path: "/updateSchedule/:id",
         element: <UpdateSchedule></UpdateSchedule>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/schedule/${params.id}`),
+          fetch(`http://localhost:5000/schedules/${params.id}`),
       },
       {
         path: "/scheduleList",
         element: <ScheduleList></ScheduleList>,
-        loader: () => fetch(`http://localhost:5000/schedule`),
+        loader: () => fetch(`http://localhost:5000/schedules`),
       },
       {
         path: "/register",

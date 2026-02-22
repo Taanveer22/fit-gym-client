@@ -6,7 +6,9 @@ import Swal from "sweetalert2";
 const ScheduleList = () => {
   const loadedList = useLoaderData();
   // console.log(loadedList);
-  const [stateList, setStateList] = useState(loadedList);
+  const [tableList, setTableList] = useState(loadedList);
+  // console.log(tableList);
+  
   const handleDelete = (id) => {
     // console.log(id);
     fetch(`http://localhost:5000/schedules/${id}`, {
@@ -18,8 +20,8 @@ const ScheduleList = () => {
         if (data.deletedCount > 0) {
           Swal.fire("delete item successfully");
         }
-        const remainingList = stateList.filter((list) => list._id !== id);
-        setStateList(remainingList);
+        const remainingList = tableList.filter((list) => list._id !== id);
+        setTableList(remainingList);
       });
   };
   return (
@@ -50,8 +52,8 @@ const ScheduleList = () => {
       {loadedList.length === 0 ? (
         <p>No Data Found</p>
       ) : (
-        <div className="">
-          {stateList.map((item, index) => (
+        <div>
+          {tableList.map((item, index) => (
             <ScheduleListItem
               item={item}
               index={index}
