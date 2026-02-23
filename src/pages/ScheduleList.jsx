@@ -12,7 +12,7 @@ const ScheduleList = () => {
 
   const handleDeleteItem = (id) => {
     // console.log(id);
-    fetch(`http://localhost:5000/schedules/${id}`, {
+    fetch(`https://fit-gym-server.onrender.com/schedules/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -30,7 +30,7 @@ const ScheduleList = () => {
 
   const handleUpdateStatus = (id) => {
     // console.log(id);
-    fetch(`http://localhost:5000/status/${id}`, {
+    fetch(`https://fit-gym-server.onrender.com/status/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -50,10 +50,10 @@ const ScheduleList = () => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:5000/schedules?searchQuery=${search}`)
+    fetch(`https://fit-gym-server.onrender.com/schedules?searchQuery=${search}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setTableList(data);
       });
   }, [search]);

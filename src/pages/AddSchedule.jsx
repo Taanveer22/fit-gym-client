@@ -34,11 +34,14 @@ const AddSchedule = () => {
     // console.log(info);
 
     // Sending POST request to backend to save schedule in database
-    const response = await fetch(`http://localhost:5000/schedules`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info),
-    });
+    const response = await fetch(
+      `https://fit-gym-server.onrender.com/schedules`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(info),
+      },
+    );
     const data = await response.json();
     // console.log(data);
     if (data.insertedId) {

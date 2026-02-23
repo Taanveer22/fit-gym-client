@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthContextProvider";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
   const { signInUser, googleSignIn } = useContext(AuthContext);
@@ -10,17 +11,25 @@ const SignIn = () => {
     const password = e.target.password.value;
     // console.log(email, password);
     signInUser(email, password)
-      .then((result) => console.log(result.user))
-      .catch((error) => console.log(error));
+      .then((result) => {
+        // console.log(result.user);
+        Swal.fire(result?.user?.displayName || "sign in done");
+      })
+      .catch((error) => {
+        // console.log(error);
+        Swal.fire(error.message);
+      });
   };
 
   const handleGoogleSignIn = () => {
     googleSignIn()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
+        Swal.fire(result?.user?.displayName || "google sign in done");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
+        Swal.fire(error.message);
       });
   };
 

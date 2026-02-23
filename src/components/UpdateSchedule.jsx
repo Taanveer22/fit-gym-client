@@ -55,11 +55,14 @@ const UpdateSchedule = () => {
 
     // Sending PATCH request to backend
     // PATCH → used to update existing data
-    const response = await fetch(`http://localhost:5000/schedules/${id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(info),
-    });
+    const response = await fetch(
+      `https://fit-gym-server.onrender.com/schedules/${id}`,
+      {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(info),
+      },
+    );
     const data = await response.json();
     // console.log(data);
     if (data.modifiedCount > 0) {
