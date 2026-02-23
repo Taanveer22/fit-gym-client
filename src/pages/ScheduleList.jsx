@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import ScheduleListItem from "./ScheduleListItem";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 const ScheduleList = () => {
@@ -8,6 +8,7 @@ const ScheduleList = () => {
   // console.log(loadedList);
   const [tableList, setTableList] = useState(loadedList);
   // console.log(tableList);
+  const [search, setSearch] = useState("");
 
   const handleDeleteItem = (id) => {
     // console.log(id);
@@ -47,6 +48,18 @@ const ScheduleList = () => {
         }
       });
   };
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/schedules?searchQuery=${search}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTableList(data);
+      });
+  }, [search]);
+
+  // console.log(search);
+
   return (
     <div>
       {/* search bar */}
@@ -68,7 +81,11 @@ const ScheduleList = () => {
               <path d="m21 21-4.3-4.3"></path>
             </g>
           </svg>
-          <input type="search" required placeholder="Search" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            type="search"
+            placeholder="Search by title"
+          />
         </label>
       </div>
       {/* send data to child */}
