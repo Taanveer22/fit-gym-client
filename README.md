@@ -1,16 +1,26 @@
-# React + Vite
+# 🏋️ Fit Gym
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack MERN stack application for managing gym schedules. Users can perform complete CRUD operations—adding new schedules, updating details, tracking status, searching entries, and deleting items—all through a responsive and modern interface with secure authentication.
 
-Currently, two official plugins are available:
+**🔗 [Live Deployment](https://fit-gym-crud.web.app/)**
+🌐 [https://fit-gym-crud.web.app/](https://fit-gym-crud.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Key Features
 
-## React Compiler
+- **Full CRUD Functionality:** Create, Read, Update, and Delete gym schedules.
+- **Search Functionality:** Quickly find schedules with real-time search.
+- **Status Update System:** Update schedule status with a double-tick indicator in the UI.
+- **Firebase Authentication:** Secure user registration, login, and sign-out powered by Firebase Auth.
+- **Dynamic Routing:** Seamless navigation using React Router.
+- **Responsive UI:** Built with a mobile-first approach using Tailwind CSS.
+- **Backend API:** Custom Express.js REST API deployed via Render.
+- **Database Integration:** Persistent storage using MongoDB Atlas.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Layer | Technologies |
+| :--- | :--- |
+| **Frontend** | React.js, Tailwind CSS, React Router |
+| **Backend** | Node.js, Express.js (Deployed on Render) |
+| **Database** | MongoDB Atlas |
+| **Authentication** | Firebase Auth |
