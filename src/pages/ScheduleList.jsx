@@ -8,8 +8,8 @@ const ScheduleList = () => {
   // console.log(loadedList);
   const [tableList, setTableList] = useState(loadedList);
   // console.log(tableList);
-  
-  const handleDelete = (id) => {
+
+  const handleDeleteItem = (id) => {
     // console.log(id);
     fetch(`http://localhost:5000/schedules/${id}`, {
       method: "DELETE",
@@ -17,11 +17,34 @@ const ScheduleList = () => {
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
+        // Update the UI immediately so it feels fast
+        const remainingList = tableList.filter((list) => list._id !== id);
+        setTableList(remainingList);
+        // Show the success message
         if (data.deletedCount > 0) {
           Swal.fire("delete item successfully");
         }
-        const remainingList = tableList.filter((list) => list._id !== id);
-        setTableList(remainingList);
+      });
+  };
+
+  const handleUpdateStatus = (id) => {
+    // console.log(id);
+    fetch(`http://localhost:5000/status/${id}`, {
+      method: "PATCH",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        // Update the UI immediately so it feels fast
+        // Copy everything from list, but change isCompleted to true
+        const updatedList = tableList.map((list) =>
+          list._id === id ? { ...list, isCompleted: true } : list,
+        );
+        setTableList(updatedList);
+        // Show the success message
+        if (data.modifiedCount) {
+          Swal.fire("status updated");
+        }
       });
   };
   return (
@@ -49,8 +72,10 @@ const ScheduleList = () => {
         </label>
       </div>
       {/* send data to child */}
-      {loadedList.length === 0 ? (
-        <p>No Data Found</p>
+      {tableList.length === 0 ? (
+        <p className="text-2xl font-semibold text-red-500 text-center mt-6">
+          No Data Found
+        </p>
       ) : (
         <div>
           {tableList.map((item, index) => (
@@ -58,7 +83,8 @@ const ScheduleList = () => {
               item={item}
               index={index}
               key={item._id}
-              handleDelete={handleDelete}
+              handleDeleteItem={handleDeleteItem}
+              handleUpdateStatus={handleUpdateStatus}
             ></ScheduleListItem>
           ))}
         </div>

@@ -43,7 +43,7 @@ const UpdateSchedule = () => {
     updateForm();
   }, [loadedData]);
 
-  const handleUpdateSchedule = async (e) => {
+  const handleUpdateScheduleForm = async (e) => {
     e.preventDefault();
     // Format date before sending to backend
     const formattedDate = formatDateOnly(date);
@@ -72,7 +72,7 @@ const UpdateSchedule = () => {
       <h1 className="text-2xl font-medium text-center my-3">
         Update Your Schedule
       </h1>
-      <form onSubmit={handleUpdateSchedule} className="w-11/12 mx-auto">
+      <form onSubmit={handleUpdateScheduleForm} className="w-11/12 mx-auto">
         <div className="grid gap-6 grid-cols-1 sm:grid-cols-2">
           {/* Title */}
           <fieldset className="fieldset w-full">
